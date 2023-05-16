@@ -23,7 +23,7 @@ def print_matrix(matrix, th=1e-16, mult=1, dec=""):
             else:
                 prin_TeX(num * mult, dec)
             if j == rows - 1:
-                print("\\")
+                print("\\\\")
             else:
                 print("&")
 
