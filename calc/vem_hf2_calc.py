@@ -10,8 +10,8 @@ from sympy.printing.latex import LatexPrinter, print_latex
 from sympy import Eq
 printing.init_printing(use_latex=True)
 
-from vem_hf2_data import get_data
-from mx_functions import ExtMatrix,SubMatrix,SubVector
+from .vem_hf2_data import get_data
+from .mx_functions import ExtMatrix,SubMatrix,SubVector
 
 #Code
 
@@ -320,7 +320,81 @@ def calculate():
 
     V={
        "A":A,
-       "Iz":Iz, 
+       "Iz":Iz,
+
+       "L_1_a":L_1_a,
+       "L_2_a":L_2_a,
+
+       "K_1_a":K_1_a,
+       "K_2_a":K_2_a,
+       "K_glob_a":K_glob_a,
+
+       "M_1_a":M_1_a,
+       "M_2_a":M_2_a,
+       "M_a":M_a,
+
+       "K_kond_a":K_kond_a,
+       "M_kond_a":M_kond_a,
+
+        "α_1_a":α_1_a,
+        "α_2_a":α_2_a,
+        "α_3_a":α_3_a,
+
+        "f_1_a":f_1_a,
+        "f_2_a":f_2_a,
+        "f_3_a":f_3_a,
+
+        "L_1_b":L_1_b,
+        "L_2_b":L_2_b,
+        "L_3_b":L_3_b,
+
+       "K_1_b":K_1_b,
+       "K_2_b":K_2_b,
+       "K_3_b":K_3_b,
+       "K_glob_b":K_glob_b,
+
+       "M_1_b":M_1_b,
+       "M_2_b":M_2_b,
+       "M_3_b":M_3_b,
+       "M_b":M_b,
+
+       "K_kond_b":K_kond_b,
+       "M_kond_b":M_kond_b,
+
+        "α_1_b":α_1_b,
+        "α_2_b":α_2_b,
+        "α_3_b":α_3_b,
+
+        "f_1_b":f_1_b,
+        "f_2_b":f_2_b,
+        "f_3_b":f_3_b,
+
+        "M_c":M_c,
+        "M_kond_c":M_kond_c,
+
+        "α_1_c":α_1_c,
+        "α_2_c":α_2_c,
+        "α_3_c":α_3_c,
+
+        "f_1_c":f_1_c,
+        "f_2_c":f_2_c,
+        "f_3_c":f_3_c,
+
+        "M_1_d":M_1_d,
+        "M_2_d":M_2_d,
+        "M_3_d":M_3_d,
+        "M_d":M_d,
+
+        "M_kond_d":M_kond_d,
+
+        "α_1_d":α_1_d,
+        "α_2_d":α_2_d,
+        "α_3_d":α_3_d,
+
+        "f_1_d":f_1_d,
+        "f_2_d":f_2_d,
+        "f_3_d":f_3_d,
     }
-
-
+    for k, v in V.items():
+        data[k] = v
+    return data
