@@ -34,6 +34,7 @@
 \def\mm{\; \left[\mathrm{m^2}\right]}
 \def\mmmm{\; \left[\mathrm{m^4}\right]}
 \def\i{\left(i\right)}
+\def\ui#1{\left(#1\right)}
 \def\SI{\; \left[\mathrm{SI}\right]}
 \def\Nm{\; \left[\mathrm{Nm}\right]}
 \def\N{\; \left[\mathrm{N}\right]}
@@ -121,4 +122,171 @@ Az alábbi táblázat tartalmazza a csomópont-elem hozzárendeléseket:
     \end{tabular}
 \end{center}
 
+\subsection{Elemek tulajdonságainak meghatározása}
+\subsubsection{Az elemek hosszainak meghatározása}
+A rúdak hosszait az alábbi általános képlet segítségével tudjuk
+könnyen kiszámítani:
+\begin{tcolorbox}[ams equation]\label{eq:L_i}
+    L^{\left(i\right)}=\sqrt{\left(x^{\left(i\right)}_2-x^{\left(i\right)}_1\right)^2+
+        \left(y^{\left(i\right)}_2-y^{\left(i\right)}_1\right)^2}
+\end{tcolorbox}
+\noindent Ezen képletet alkalmazva a rúdak hosszai numerikusan az alábbiak:
+\begin{multicols}{2}
+    \begin{itemize}
+        \item $L_1^{\ui{a}}=\pyc{prin_TeX(V["L_1_a"])} \m$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $L_2^{\ui{a}}=\pyc{prin_TeX(V["L_2_a"])} \m$
+    \end{itemize}
+\end{multicols}
+
+\subsubsection{Az elemek keresztmetszeteinek tulajdonságainak meghatározása}
+Mivel mindegyik elemünk kör keresztmetszetű, így az alábbi összefüggésekkel számíthatjuk ki a keresztmetszetek területét
+és másodrendű nyomatékait:
+\begin{tcolorbox}[ams equation]
+    A^{\i}=\frac{\left(d^{\i}\right)^2  \pi}{4} \hspace{40mm}
+    I_z^{\i}=\frac{\left(d^{\i}\right)^4  \pi}{64}
+\end{tcolorbox}
+\noindent Mivel az elemk keresztmetszeteinek átmérője azonos,
+ezért az elemek keresztmetszeteinek területei valamint másodrendű nyomatékai
+megegyeznek. Tehát a keresztmetszetek területei és másodrendű nyomatékai numerikusan:
+\begin{multicols}{2}
+    \begin{itemize}
+        \item $A_1^{\ui{a}}=A_2^{\ui{a}}=\pyc{prin_TeX(V["A"]*10**4,3)} \cdot 10^{-4}\mm$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item ${I_z}_1^{\ui{a}}={I_z}_2^{\ui{a}}=\pyc{prin_TeX(V["Iz"]*10**8,3)} \cdot 10^{-8} \mmmm$
+    \end{itemize}
+\end{multicols}
+\subsection{Az elemi merevségi mátrixok meghatározása}
+Most hogy már ismerjük a keresztmetszetek területét, másodrendű nyomatékait valamint rugalmassági modulusait, az alábbi
+\textbf{BEAM} gerendaelemre vonatkozó összefüggéssel meghatározhatjuk a különböző elemek merevségi mátrixait:
+\begin{tcolorbox}[ams equation]
+    \mx{K}^{\i}=\frac{{I_z}_i E_i}{{L_i}^3}
+    \begin{bmatrix}
+        12    & 6 L_i        & -12    & 6 L_i        \\
+        6 L_i & \; 4 {L_i}^2 & -6 L_i & \; 2 {L_i}^2 \\
+        -12   & -6 L_i       & \; 12  & -6 L_i       \\
+        6 L_i & \; 2 {L_i}^2 & -6 L_i & \; 4 {L_i}^2
+    \end{bmatrix}
+\end{tcolorbox}
+\subsubsection*{Így az elemi merevségi mátrixok numerikusan:}
+\begin{eqnarray*}
+    \mx{K}_1^{\ui{a}}&= \\
+    \mx{K}_2^{\ui{a}}&=
+\end{eqnarray*}
+\subsection{Globális merevségi mátrix meghatározása}
+Esetünkben három csomópontunk van, valamint mindegyik 2-2 szabadságfokkal rendelkezik,
+így összesen 6 szabadsági fokunk van.
+Rendeljünk hozzá a szabadságfokokat mindegyik rúdelemünkhöz, az alábbi mátrixba rendezve:
+\begin{equation*}
+    \mx{DoF}^{\ui{a}}=
+    \begin{blockarray}{ccccc}
+        {v_1}^{\i} & {{\vartheta}_1}^{\i} & {v_2}^{\i} & {{\vartheta}_2}^{\i} \\
+        \begin{block}{[cccc]c}
+            1 & 2 & 3 & 4 & \left(\mathbf{1}\right) \\
+            3 & 4 & 5 & 6 & \left(\mathbf{2}\right) \\
+        \end{block}
+    \end{blockarray}
+\end{equation*}
+\noindent
+A globális merevségi mátrixot úgy kell elő állítanunk, hogy
+az adott elemhez tartozó merevségi mátrix elemeit a megfelelő szabadsági
+fokhoz tartozó helyhez rendeljük hozzá. Ezután az alábbi numerikus eredményt kapjuk:
+\begin{equation*}
+    \mx{K}^{\ui{a}}= \SI
+\end{equation*}
+\subsection{Az elemi tömegmátrixok meghatározása}
+Az elemek tömegmátrixait az alábbi módon tudjuk meghatározni \textit{konzisztens} tömegmátrix alkalmazása
+mellett kétcsomópontos síkbeli rúdelem esetén:
+\begin{tcolorbox}[ams equation]
+    \mx{M}_m^{\i}=\frac{\rho A_i L_i}{420}
+    \begin{bmatrix}
+        156     & 22 L_i   & 54        & -13 L_i    \\
+        22 L_i  & 4 L_i^2  & \; 13 L_i & -3 L_i^2   \\
+        54      & 13 L_i   & 156       & -22 L_i    \\
+        -13 L_i & -3 L_i^2 & -22 L_i   & \; 4 L_i^2
+    \end{bmatrix}
+\end{tcolorbox}
+\subsubsection*{Így az elemi tömegmátrixok numerikusan:}
+\begin{eqnarray*}
+    \mx{M}_1^{\ui{a}}&= \\
+    \mx{M}_2^{\ui{a}}&=
+\end{eqnarray*}
+\subsection{Globális tömegmátrix meghatározása}
+A globális tömegmátrixot úgy kell meghatároznunk, ahogy a globális merevségi mátrixot is,
+tehát az adott elemhez tartozó tömegmátrix elemeit a megfelelő szabadsági
+fokhoz tartozó helyhez rendeljük hozzá. Ezután az alábbi numerikus eredményt kapjuk:
+\begin{equation*}
+    \mx{K}^{\ui{a}}= \SI
+\end{equation*}
+\subsection{Hajlító sajátfrekvenciák meghatározása}
+Írjuk fel a diszkretizált mozgásegyenletet:
+\begin{tcolorbox}[ams equation]
+    \mx{M}^{\i} \ddot{\vec{U}}+\mx{K}^{\i} \vec{U}=0
+\end{tcolorbox}
+\noindent A mozgásegyenlet segítségével feltudjuk írni a frekvencia egyenletet, amely segítségével
+kitudjuk számítani a hajlító sajátfrekvenciákat.
+A frekvencia egyenlet alakja az alábbi:
+\begin{tcolorbox}[ams equation]
+    \det \left(\mx{K}^{\i}-\alpha^2 \mx{M}^{\i}\right)=0
+\end{tcolorbox}
+\subsubsection{A frekvencia egyenlet kondenzálása}
+Ahhoz, hogy kitudjuk számítani a hajlító sajátfrekvenciákat kondenzáljuk a frekvencia egyenletet!
+A kondenzáláskor a kötött szabadsági fokokhoz, tehát a zérus értékű elmozduláskomponensekhez tartozó sorokat és oszlopokat kell törölnünk a merevségi és tömeg mátrixból.
+\subsubsection*{A globális elmozdulásvektor:}
+\begin{equation*}
+    \vec{U}^{\ui{a}}=
+    \begin{bmatrix}
+        0 & 0 & v_2 & \vartheta_2 & 0 & \vartheta_3
+    \end{bmatrix}^{\mathrm{T}} \SI
+\end{equation*}
+
+\noindent A globális elmozdulásvektor alapján az alábbi kondenzált mennyiségek adódnak:
+\begin{eqnarray*}
+    \mx{\hat{K}}^{\ui{a}}&= \\
+    \mx{\hat{M}}^{\ui{a}}&=
+\end{eqnarray*}
+\subsubsection{A hajlító sajátkörfrekvenciák meghatározása}
+Most már feltudjuk írni a kondenzált frekvencia egyenlet:
+\begin{tcolorbox}[ams equation]
+    \det \left(\mx{\hat{K}}^{\i}-\alpha^2 \mx{\hat{M}}^{\i}\right)=0
+\end{tcolorbox}
+\noindent Az egyenletet megoldva az első három $\alpha$-ra az alábbi numerikus értékeket kapjuk:
+\begin{multicols}{3}
+    \begin{itemize}
+        \item $\alpha_1^{\ui{a}}=\pyc{prin_TeX(V["α_1_a"],3)} \rads$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $\alpha_2^{\ui{a}}=\pyc{prin_TeX(V["α_2_a"],3)} \rads$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $\alpha_1^{\ui{a}}=\pyc{prin_TeX(V["α_3_a"],3)} \rads$
+    \end{itemize}
+\end{multicols}
+\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
+A hajlító sajátfrekvenciákból az alábbi egyszerű összefüggéssel tudjuk kiszámolni a sajátfrekvenciákat:
+\begin{tcolorbox}[ams equation]
+    f_i=\frac{\alpha_i}{2 \pi}
+\end{tcolorbox}
+\noindent Így az alábbi sajátfrekvencia értékeket kapjuk:
+\begin{multicols}{3}
+    \begin{itemize}
+        \item $f_1^{\ui{a}}=\pyc{prin_TeX(V["f_1_a"],3)} \Hz$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $f_2^{\ui{a}}=\pyc{prin_TeX(V["f_2_a"],3)} \Hz$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $f_1^{\ui{a}}=\pyc{prin_TeX(V["f_3_a"],3)} \Hz$
+    \end{itemize}
+\end{multicols}
+\newpage
+\tableofcontents
 \end{document}
