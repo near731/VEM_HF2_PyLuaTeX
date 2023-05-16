@@ -13,13 +13,7 @@ printing.init_printing(use_latex=True)
 from .vem_hf2_data import get_data
 from .mx_functions import ExtMatrix,SubMatrix,SubVector
 
-#Code
-
-code_2=2
-code_3=2
-code_4=2
-
-def calculate():
+def calculate(code_2, code_3, code_4):
     #get data
 
     data = get_data(code_2, code_3, code_4)
