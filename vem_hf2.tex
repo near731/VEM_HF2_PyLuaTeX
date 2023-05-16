@@ -1,0 +1,124 @@
+%Preamble
+\documentclass[12pt,a4paper]{article}
+\usepackage[top=20mm, bottom=20mm, left=20mm, right=20mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr} \setlength{\headheight}{15pt}
+\usepackage{lastpage}
+\usepackage{t1enc}
+\usepackage[magyar]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb,physics}
+\usepackage{amsthm}
+\usepackage{empheq}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{blkarray}
+\usepackage{mathtools}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{picture}
+\usepackage{graphicx}
+\usepackage{makecell}
+\usepackage{eso-pic}
+\usepackage[executable=python3.10.exe]{pyluatex}
+
+\pagestyle{fancy}
+\def\mx#1{\mathbf{#1}}
+\def\vec#1{\underline{\mathbf{#1}}}
+\def\m{\; \left[\mathrm{m}\right]}
+\def\mili{\; \left[\mathrm{mm}\right]}
+\def\mm{\; \left[\mathrm{m^2}\right]}
+\def\mmmm{\; \left[\mathrm{m^4}\right]}
+\def\i{\left(i\right)}
+\def\SI{\; \left[\mathrm{SI}\right]}
+\def\Nm{\; \left[\mathrm{Nm}\right]}
+\def\N{\; \left[\mathrm{N}\right]}
+\def\kN{\; \left[\mathrm{kN}\right]}
+\def\futyi{\cdot 10^{9}}
+\def\fos{\; \left[-\right]}
+\def\Gpa{\; \left[\mathrm{GPa}\right]}
+\def\rads{\; \left[\mathrm{\frac{rad}{s}}\right]}
+\def\Hz{\; \left[\mathrm{Hz}\right]}
+\def\kg{\; \left[\mathrm{kg}\right]}
+\def\kgpm{\; \left[\mathrm{\frac{kg}{\; m^3}}\right]}
+
+\lhead{BMEGEMMBXVE, VEM alapjai 2.HF}
+\cfoot{\thepage\ / \pageref{LastPage}}
+\rhead{Németh Áron Imre, D1J5ZG}
+
+\begin{python}
+    import sympy as sp
+    from sympy.printing.latex import LatexPrinter, print_latex
+    from sympy import latex
+    from calc.vem_hf2_calc import calculate
+    from calc.var_print import printer, print_matrix, prin_TeX, my_latex
+
+    V=calculate()
+\end{python}
+
+\begin{document}
+
+\section{A szerkezet méretarányos ábrájának elkészítése}
+\subsubsection*{Adatok:}
+
+\begin{multicols}{2}
+    \begin{itemize}
+        \item $a=\pyc{prin_TeX(V["a"],1)}\m$
+        \item $b=\pyc{prin_TeX(V["b"])}\m$
+        \item $d=\pyc{prin_TeX(V["d_mm"])}\mili$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $E=\pyc{prin_TeX(V["E_GPa"])} \Gpa$
+        \item $m_0=\pyc{prin_TeX(V["m_0"])} \kg$
+        \item $\rho=\pyc{prin_TeX(V["rho"])} \kgpm $
+    \end{itemize}
+\end{multicols}
+
+\subsection{A szerkezet léptékhelyes ábrája}
+A szerkezet méretarányos ábrája esetünkben az alábbi módon néz ki:
+
+\subsection{A szerkezet végeselem modelljének ábrája}
+Az alábbi ábrán látható a szerkezet VEM modellje:
+
+\section{Két BEAM elem használata}
+
+\subsection{Csomópontok, elemek definiálása}
+\subsubsection{Csomópontok definiálása}
+Az alábbi táblázatban láthatóak a különböző csomópontok $x$ illetve
+$y$ koordinátái:
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Csomópont & x koordináta & y koordináta \\
+        \hline
+        \hline
+        1         & 0            & $0$          \\
+        \hline
+        2         & $b$          & $0$          \\
+        \hline
+        3         & $a+b$        & $0$          \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Elemek hozzárendelése a csomó pontokhoz}
+Az alábbi táblázat tartalmazza a csomópont-elem hozzárendeléseket:
+\begin{center}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Elemszám & Lokális 1. csomópont & Lokális 2. csomópont \\
+        \hline
+        \hline
+        1        & 1                    & 2                    \\
+        \hline
+        2        & 2                    & 3                    \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\end{document}

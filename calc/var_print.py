@@ -7,7 +7,6 @@ def round(num, numDecimalPlaces=None):
         num = float(f"{num:.{numDecimalPlaces}f}")
     return num  
 
-
 def prin_TeX(num, dec=None):
     if dec is not None and dec != "":
         num = round(num, dec)
@@ -22,9 +21,9 @@ def print_matrix(matrix, th=1e-16, mult=1, dec=""):
             if abs(num) < th:
                 print(0)
             else:
-                prin_TeX(num * mult, "", dec)
+                prin_TeX(num * mult, dec)
             if j == rows - 1:
-                print("\\\\")
+                print("\\")
             else:
                 print("&")
 

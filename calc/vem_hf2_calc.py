@@ -30,6 +30,8 @@ def calculate():
     d = data['d']
     E = data['E']
     ρ = data['ρ']
+    d_mm = data['d_mm']
+    E_GPa=data['E_GPa']
 
     #2.feladat
 
@@ -319,6 +321,14 @@ def calculate():
     f_3_d=freq(α_3_d)
 
     V={
+        "a":a,
+        "b":b,
+        "d":d,
+        "d_mm":d_mm,
+        "E_GPa":E_GPa,
+        "m_0":m_0,
+        "rho":ρ,
+
        "A":A,
        "Iz":Iz,
 

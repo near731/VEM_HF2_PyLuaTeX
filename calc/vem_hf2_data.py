@@ -18,12 +18,12 @@ def get_data(code2, code3, code4):
         'a': a_list[code2 - 1],
         'm_0': m_0_list[code2 - 1],
         'b': b_list[code3 - 1],
-        'd': d_list[code3 - 1],
-        'E': E_list[code4 - 1],
+        'd_mm': d_list[code3 - 1],
+        'E_GPa': E_list[code4 - 1],
         'ρ': ρ_list[code4 - 1]
     }
     # Change to SI
 
-    data['E'] *= 10**9
-    data['d'] /= 1000
+    data['E'] = data['E_GPa']*10**9
+    data['d'] = data['d_mm']/1000
     return data
