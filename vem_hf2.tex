@@ -84,7 +84,10 @@ A szerkezet méretarányos ábrája esetünkben az alábbi módon néz ki:
 Az alábbi ábrán látható a szerkezet VEM modellje:
 
 \section{Két BEAM elem használata}
-
+A VEM modell két \textbf{BEAM} elemből áll, egyik elem az \textbf{AB} szakaszon,
+míg a második elem a \textbf{BC} szakaszon helyezkedik el. A számítások során
+a koncenrált tömeget \textit{elhanyagoljuk}, valamint \textit{konzisztens} tömegmátrixot
+használunk.
 \subsection{Csomópontok, elemek definiálása}
 \subsubsection{Csomópontok definiálása}
 Az alábbi táblázatban láthatóak a különböző csomópontok $x$ illetve
@@ -170,10 +173,16 @@ Most hogy már ismerjük a keresztmetszetek területét, másodrendű nyomatéka
     \end{bmatrix}
 \end{tcolorbox}
 \subsubsection*{Így az elemi merevségi mátrixok numerikusan:}
-\begin{eqnarray*}
-    \mx{K}_1^{\ui{a}}&= \\
-    \mx{K}_2^{\ui{a}}&=
-\end{eqnarray*}
+\begin{align*}
+    \mx{K}_1^{\ui{a}} & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["K_1_a"],1e-6,1,2)}
+    \end{bmatrix} \SI \\[2mm]
+    \mx{K}_2^{\ui{a}} & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["K_2_a"],1e-6,1,2)}
+    \end{bmatrix} \SI
+\end{align*}
 \subsection{Globális merevségi mátrix meghatározása}
 Esetünkben három csomópontunk van, valamint mindegyik 2-2 szabadságfokkal rendelkezik,
 így összesen 6 szabadsági fokunk van.
@@ -193,7 +202,10 @@ A globális merevségi mátrixot úgy kell elő állítanunk, hogy
 az adott elemhez tartozó merevségi mátrix elemeit a megfelelő szabadsági
 fokhoz tartozó helyhez rendeljük hozzá. Ezután az alábbi numerikus eredményt kapjuk:
 \begin{equation*}
-    \mx{K}^{\ui{a}}= \SI
+    \mx{K}^{\ui{a}}=
+    \begin{bmatrix}
+        \pyc{print_matrix(V["K_glob_a"],1e-6,1,2)}
+    \end{bmatrix} \SI
 \end{equation*}
 \subsection{Az elemi tömegmátrixok meghatározása}
 Az elemek tömegmátrixait az alábbi módon tudjuk meghatározni \textit{konzisztens} tömegmátrix alkalmazása
@@ -208,16 +220,25 @@ mellett kétcsomópontos síkbeli rúdelem esetén:
     \end{bmatrix}
 \end{tcolorbox}
 \subsubsection*{Így az elemi tömegmátrixok numerikusan:}
-\begin{eqnarray*}
-    \mx{M}_1^{\ui{a}}&= \\
-    \mx{M}_2^{\ui{a}}&=
-\end{eqnarray*}
+\begin{align*}
+    \mx{M}_1^{\ui{a}} & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_1_a"],1e-6,1,2)}
+    \end{bmatrix} \SI \\[2mm]
+    \mx{M}_2^{\ui{a}} & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_2_a"],1e-6,1,2)}
+    \end{bmatrix} \SI
+\end{align*}
 \subsection{Globális tömegmátrix meghatározása}
 A globális tömegmátrixot úgy kell meghatároznunk, ahogy a globális merevségi mátrixot is,
 tehát az adott elemhez tartozó tömegmátrix elemeit a megfelelő szabadsági
 fokhoz tartozó helyhez rendeljük hozzá. Ezután az alábbi numerikus eredményt kapjuk:
 \begin{equation*}
-    \mx{K}^{\ui{a}}= \SI
+    \mx{M}^{\ui{a}}=
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_a"],1e-6,1,2)}
+    \end{bmatrix} \SI
 \end{equation*}
 \subsection{Hajlító sajátfrekvenciák meghatározása}
 Írjuk fel a diszkretizált mozgásegyenletet:
@@ -242,10 +263,16 @@ A kondenzáláskor a kötött szabadsági fokokhoz, tehát a zérus értékű el
 \end{equation*}
 
 \noindent A globális elmozdulásvektor alapján az alábbi kondenzált mennyiségek adódnak:
-\begin{eqnarray*}
-    \mx{\hat{K}}^{\ui{a}}&= \\
-    \mx{\hat{M}}^{\ui{a}}&=
-\end{eqnarray*}
+\begin{align*}
+    \mx{\hat{K}}^{\ui{a}} & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["K_kond_a"],1e-6,1,2)}
+    \end{bmatrix} \SI \\[2mm]
+    \mx{\hat{M}}^{\ui{a}} & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_kond_a"],1e-6,1,2)}
+    \end{bmatrix} \SI
+\end{align*}
 \subsubsection{A hajlító sajátkörfrekvenciák meghatározása}
 Most már feltudjuk írni a kondenzált frekvencia egyenlet:
 \begin{tcolorbox}[ams equation]
@@ -284,6 +311,14 @@ A hajlító sajátfrekvenciákból az alábbi egyszerű összefüggéssel tudjuk
         \item $f_1^{\ui{a}}=\pyc{prin_TeX(V["f_3_a"],3)} \Hz$
     \end{itemize}
 \end{multicols}
+
 \newpage
 \tableofcontents
+\subsection*{Felhasznált szoftverek:}
+\begin{itemize}
+    \item Lua\LaTeX \hspace{0.4mm} szövegszerkesztő: VS Code
+    \item Ábrák rajzolása: Adobe Illustrator
+    \item Számítások elvégzése: JuPyter Notebook
+    \item Eredmények ellenőrzése: SIKEREZ
+\end{itemize}
 \end{document}
