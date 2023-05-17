@@ -89,7 +89,7 @@ Az alábbi ábrán látható a szerkezet VEM modellje:
 \section{Két BEAM elem használata}
 A VEM modell két \textbf{BEAM} elemből áll, egyik elem az \textbf{AB} szakaszon,
 míg a második elem a \textbf{BC} szakaszon helyezkedik el. A számítások során
-a koncenrált tömeget \textit{elhanyagoljuk}, valamint \textit{konzisztens} tömegmátrixot
+a koncentrált tömeget \textit{elhanyagoljuk}, valamint \textit{konzisztens} tömegmátrixot
 használunk.
 \subsection{Csomópontok, elemek definiálása}
 \subsubsection{Csomópontok definiálása}
@@ -175,7 +175,7 @@ Most hogy már ismerjük a keresztmetszetek területét, másodrendű nyomatéka
         6 L_i & \; 2 {L_i}^2 & -6 L_i & \; 4 {L_i}^2
     \end{bmatrix}
 \end{tcolorbox}
-\subsubsection*{Így az elemi merevségi mátrixok numerikusan:}
+\noindent Így az elemi merevségi mátrixok numerikusan:
 \begin{align*}
     \mx{K}_1^{\ui{a}} & =
     \begin{bmatrix}
@@ -222,7 +222,7 @@ mellett kétcsomópontos síkbeli gerenda elem esetén:
         -13 L_i & -3 L_i^2 & -22 L_i   & \; 4 L_i^2
     \end{bmatrix}
 \end{tcolorbox}
-\subsubsection*{Így az elemi tömegmátrixok numerikusan:}
+\noindent Így az elemi tömegmátrixok numerikusan az alábbiak:
 \begin{align*}
     \mx{M}_1^{\ui{a}} & =
     \begin{bmatrix}
@@ -276,7 +276,7 @@ A kondenzáláskor a kötött szabadsági fokokhoz, tehát a zérus értékű el
         \pyc{print_matrix(V["M_kond_a"],1e-6,1,2)}
     \end{bmatrix} \SI
 \end{align*}
-\subsubsection{A hajlító sajátkörfrekvenciák meghatározása}
+\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
 Most már feltudjuk írni a kondenzált frekvencia egyenlet:
 \begin{tcolorbox}[ams equation]\label{eq:freq_k}
     \det \left(\mx{\hat{K}}^{\i}-\alpha^2 \mx{\hat{M}}^{\i}\right)=0
@@ -295,8 +295,8 @@ Most már feltudjuk írni a kondenzált frekvencia egyenlet:
         \item $\alpha_3^{\ui{a}}=\pyc{prin_TeX(V["α_3_a"],3)} \rads$
     \end{itemize}
 \end{multicols}
-\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
-A hajlító sajátfrekvenciákból az alábbi egyszerű összefüggéssel tudjuk kiszámolni a sajátfrekvenciákat:
+\noindent
+A hajlító sajátfrekvenciákból az alábbi összefüggéssel tudjuk kiszámolni a sajátfrekvenciákat:
 \begin{tcolorbox}[ams equation]
     f_i=\frac{\alpha_i}{2 \pi}
 \end{tcolorbox}
@@ -456,7 +456,7 @@ fokhoz tartozó helyhez rendeljük hozzá. Ezután az alábbi numerikus eredmén
 A frekvencia egyenlet megoldásához (\eqref{eq:freq}-es egyenlet) megoldásához, ismét
 kondenzálnunk kell a merevségi és a tömeg mátrixokat, írjuk fel a globális elmozdulásvektort, hogy
 megtudjuk, melyik sorokat és oszlopokat kell törölnünk a frekvencia egyenletből.
-\subsubsection*{A globális terhelésvektor:}
+\subsubsection*{A globális elmozdulásvektor:}
 \begin{equation*}
     \vec{U}^{\ui{b}}=
     \begin{bmatrix}
@@ -474,7 +474,7 @@ megtudjuk, melyik sorokat és oszlopokat kell törölnünk a frekvencia egyenlet
         \pyc{print_matrix(V["M_kond_b"],1e-6,1,2)}
     \end{bmatrix} \SI
 \end{align*}
-\subsubsection{A hajlító sajátkörfrekvenciák meghatározása}
+\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
 A kondenzált frekvencia egyenletet (\eqref{eq:freq_k}-es egyenlet) megoldva az alábbi
 numerikus értékeket kapjuk az első három sajátkörfrekvenciára:
 \begin{multicols}{3}
@@ -490,7 +490,7 @@ numerikus értékeket kapjuk az első három sajátkörfrekvenciára:
         \item $\alpha_3^{\ui{b}}=\pyc{prin_TeX(V["α_3_b"],3)} \rads$
     \end{itemize}
 \end{multicols}
-\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
+\noindent
 Innen pedig könnyen meghatározhatjuk a sajátfrekvenciák numerikus értékeit:
 \begin{multicols}{3}
     \begin{itemize}
@@ -507,8 +507,8 @@ Innen pedig könnyen meghatározhatjuk a sajátfrekvenciák numerikus értékeit
 \end{multicols}
 
 \section{Koncentrált tömeg figyelembe vétele}
-Az egyennlet különbség az előző feladathoz képest az, hogy most \textit{figyelembe vesszük}
-a koncenrált tömeget a modellezés során. Ismét 3 db \textbf{BEAM} elemet használunk,
+Az egyetlen különbség az előző feladathoz képest az, hogy most \textit{figyelembe vesszük}
+a koncentrált tömeget a modellezés során. Ismét 3 db \textbf{BEAM} elemet használunk,
 valamint \textit{konzisztens} tömegmátrixokat alkalmazzunk. Az előző feladathoz való
 hasonlóság miatt, csak azon mennyiségek numerikus értékeit írom le amelyek eltérnek az előző
 feladatban tárgyaltól. A feladat megoldási menete megegyezik a korábbi feladatokéval.
@@ -524,7 +524,7 @@ tömeget.
 \subsection{Hajlító sajátfrekvenciák meghatározása}
 \subsubsection{Mennyiségek kondenzálása}
 Míg a kondenzált merevségi mátrix értéke megegyezik az előző feladatbeli kondenzált merevségi
-mátrix értékével, addig a kondenzált tömegmátrix numerikus értéke az alábbi a koncenrált tömeget
+mátrix értékével, addig a kondenzált tömegmátrix numerikus értéke az alábbi a koncentrált tömeget
 \textit{figyelembe véve}:
 \begin{equation*}
     \mx{\hat{M}}^{\ui{c}}=
@@ -532,7 +532,7 @@ mátrix értékével, addig a kondenzált tömegmátrix numerikus értéke az al
         \pyc{print_matrix(V["M_kond_c"],1e-6,1,2)}
     \end{bmatrix} \SI
 \end{equation*}
-\subsubsection{A hajlító sajátkörfrekvenciák meghatározása}
+\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
 A kondenzált frekvencia egyenletet (\eqref{eq:freq_k}-es egyenlet) megoldva az alábbi
 numerikus értékeket kapjuk az első három sajátkörfrekvenciára:
 \begin{multicols}{3}
@@ -548,7 +548,7 @@ numerikus értékeket kapjuk az első három sajátkörfrekvenciára:
         \item $\alpha_3^{\ui{c}}=\pyc{prin_TeX(V["α_3_c"],3)} \rads$
     \end{itemize}
 \end{multicols}
-\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
+\noindent
 Innen pedig könnyen meghatározhatjuk a sajátfrekvenciák numerikus értékeit:
 \begin{multicols}{3}
     \begin{itemize}
@@ -563,13 +563,103 @@ Innen pedig könnyen meghatározhatjuk a sajátfrekvenciák numerikus értékeit
         \item $f_3^{\ui{c}}=\pyc{prin_TeX(V["f_3_c"],3)} \Hz$
     \end{itemize}
 \end{multicols}
-\newpage
-\tableofcontents
-\subsection*{Felhasznált szoftverek:}
+\section{Koncentrált tömegmátrix alkalmazása}
+Ez a feladat annyiban tér el a 4.feladattól, hogy konzisztens tömegmátrix
+helyett koncentrált tömegmátrixot  (\textit{lumped mass matrix}) alkalmazzunk, ahol
+a tehetetlenségi nyomatékokat is figyelembe vesszük.
+A koncentrált tömeget ismét \textit{figyelembe vesszük}, valamint ugyanúgy 3
+\textbf{BEAM} elemet használunk, azonos csomópont számozással.
+A feladat részletezése során csak azokokra a pontokra térek ki, ahol az eredmények eltérnek
+a korábbi feladatban számítottaktól.
+
+\subsection{Az elemi tömegmátrixok meghatározása}
+Mivel most már \textit{koncentrált} tömegmátrixot használunk, az elemek tömegmátrixait
+az alábbi módon számíthatjuk ki:
+\begin{tcolorbox}[ams equation]
+    \mx{M}_k^{\i}=\frac{\rho A L_i}{2}
+    \begin{bmatrix}
+        1 & 0                & 0 & 0                \\[0.7mm]
+        0 & \frac{L_i^2}{12} & 0 & 0                \\[0.7mm]
+        0 & 0                & 1 & 0                \\[0.7mm]
+        0 & 0                & 0 & \frac{L_i^2}{12}
+    \end{bmatrix}
+\end{tcolorbox}
+\noindent Innen az alábbi elemi tömegmátrixok adódnak:
+\begin{align*}
+    \mx{M}_1^{\ui{d}}=\mx{M}_2^{\ui{d}} & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_1_d"],1e-6,1,2)}
+    \end{bmatrix} \SI \\[2mm]
+    \mx{M}_3^{\ui{d}}                   & =
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_3_d"],1e-6,1,2)}
+    \end{bmatrix} \SI
+\end{align*}
+\subsection{Globális tömegmátrix meghatározása}
+A globális tömegmátrix meghatározása szokásosan a szabadsági fokok figyelembe
+vételével történik, valamint most is \textit{figyelembe vesszük} a koncentrált
+tömeget.
+\begin{equation*}
+    \mx{M}^{\ui{d}}=\mx{M}_k^{\ui{d}}+\mx{M}_k=
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_d"],1e-6,1,2)}
+    \end{bmatrix} \SI
+\end{equation*}
+\subsection{Hajlító sajátfrekvenciák meghatározása}
+\subsubsection{Mennyiségek kondenzálása}
+Míg a kondenzált merevségi mátrix értéke megegyezik az előző feladatbeli kondenzált merevségi
+mátrix értékével, addig a kondenzált tömegmátrix numerikus értéke az alábbi eltér hiszen most
+\textit{koncentrált} tömegmátrixokat alkalmaztunk. így az alábbi numerikus eredményt kaptuk:
+\begin{equation*}
+    \mx{\hat{M}}^{\ui{d}}=
+    \begin{bmatrix}
+        \pyc{print_matrix(V["M_kond_d"],1e-6,1,2)}
+    \end{bmatrix} \SI
+\end{equation*}
+\subsubsection{A hajlító sajátfrekvenciák numerikus kiszámítása}
+Oldjuk meg ismét a kondenzált frekvencia egyenletet! Így az alábbi
+numerikus eredményeket kapjuk az első három sajátkörfrekvenciára:
+\begin{multicols}{3}
+    \begin{itemize}
+        \item $\alpha_1^{\ui{d}}=\pyc{prin_TeX(V["α_1_d"],3)} \rads$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $\alpha_2^{\ui{d}}=\pyc{prin_TeX(V["α_2_d"],3)} \rads$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $\alpha_3^{\ui{d}}=\pyc{prin_TeX(V["α_3_d"],3)} \rads$
+    \end{itemize}
+\end{multicols}
+\noindent Innen pedig már könnyen meghatározhatjuk a sajátfrekvenciák numerikus értékeit:
+\begin{multicols}{3}
+    \begin{itemize}
+        \item $f_1^{\ui{d}}=\pyc{prin_TeX(V["f_1_d"],3)} \Hz$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $f_2^{\ui{d}}=\pyc{prin_TeX(V["f_2_d"],3)} \Hz$
+    \end{itemize}
+    \columnbreak
+    \begin{itemize}
+        \item $f_3^{\ui{d}}=\pyc{prin_TeX(V["f_3_d"],3)} \Hz$
+    \end{itemize}
+\end{multicols}
+
+\section*{Számítások elvégzése}
+A számításokat egy Jupyter Notebook-ban végeztem el ami
+\href{https://github.com/near731/VEM_HF2_Python/blob/main/vem_hf2.ipynb}{ide} kattintva érhető el.
+
+\section*{Felhasznált szoftverek:}
 \begin{itemize}
     \item Lua\LaTeX \hspace{0.4mm} szövegszerkesztő: VS Code
     \item Ábrák rajzolása: Adobe Illustrator
     \item Számítások elvégzése: JuPyter Notebook
     \item Eredmények ellenőrzése: SIKEREZ
 \end{itemize}
+
+\newpage
+\tableofcontents
+
 \end{document}
