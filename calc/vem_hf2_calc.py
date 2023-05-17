@@ -106,9 +106,7 @@ def calculate(code_2, code_3, code_4):
 
     def alpha(K_i,M_i,n):
         A=K_i-α**2*M_i
-        xarr = range(-n, n+1)
-        yarr = [A.subs(α, x).det() for x in xarr]
-        detA = expand(interpolating_poly(len(xarr), α, xarr, yarr))
+        detA =A.det("berkowitz")
         alphas=sp.solve(detA,α**2)
         α_vec = sp.Matrix([sp.re(α)**0.5 for α in alphas if sp.re(α) > 0 and abs(sp.im(α)) < 1e-5])
         α_vec = sorted(α_vec, key=lambda x: float(x))
